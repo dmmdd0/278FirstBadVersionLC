@@ -17,10 +17,24 @@ func main() {
  */
 
 func firstBadVersion(n int) int {
+	min := 1
+	max := n
+	middle := (max - min) / 2
 
-	return 0
+	for min != max {
+		switch isBadVersion(middle) {
+		case true:
+			max = middle
+			middle = min + (max-min)/2
+		case false:
+			min = middle
+			middle = min + (max-min)/2
+		}
+	}
+
+	return middle
 }
 
 func isBadVersion(version int) bool {
-	return version == 71
+	return version >= 71
 }
