@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	n := 100
+	n := 10
 	fmt.Println(firstBadVersion(n))
 
 }
@@ -21,20 +21,20 @@ func firstBadVersion(n int) int {
 	max := n
 	middle := (max - min) / 2
 
-	for min != max {
+	for min <= max {
 		switch isBadVersion(middle) {
 		case true:
-			max = middle
-			middle = min + (max-min)/2
+			max = middle - 1
 		case false:
-			min = middle
-			middle = min + (max-min)/2
+			min = middle + 1
 		}
+		middle = min + (max-min)/2
+
 	}
 
 	return middle
 }
 
 func isBadVersion(version int) bool {
-	return version >= 71
+	return version >= 1
 }
